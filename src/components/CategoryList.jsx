@@ -1,35 +1,38 @@
-import React,{useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import { ProductContext } from '../context/Products';
 
 const CategoryList = () => {
-    const {allProducts,setAllProducts } = useContext(ProductContext)
+    const {allProducts,setFilteredProducts} = useContext(ProductContext)
     const [selectedOptions, setSelectedOptions] = useState([]);
+    // const [filteredProducts, setFilteredProducts] = useState([]);
 
-    const handleCheckboxChange = (text) => {
-        // Toggle the selected option
-        const updatedOptions = selectedOptions.includes(text)
-          ? selectedOptions.filter((option) => option !== text)
-          : [...selectedOptions, text];
-      
-        // Update selectedOptions state
-        setSelectedOptions(updatedOptions);
-      
-        // Filter products based on selected categories
-        const filteredProducts = allProducts.filter((product) => {
-          // If no category is selected, show all products
-          if (updatedOptions.length === 0 || updatedOptions.includes('all')) {
-            return true;
-          }
-      
-          // Check if all selected categories are present in the product's categories (case-insensitive)
-          return updatedOptions.every((selectedCategory) =>
-            product.category.toLowerCase().includes(selectedCategory.toLowerCase())
-          );
+    useEffect(() => {
+        const filteredProductList = allProducts.filter((product) => {
+            // If no category is selected, show all products
+            if (selectedOptions.length === 0 || selectedOptions.includes('all')) {
+                return true;
+            }
+    
+            // Check if the product's category matches any selected category (case-insensitive)
+            const matchesCategory = selectedOptions.some((selectedCategory) => {
+                return product.category.toLowerCase().includes(selectedCategory.toLowerCase());
+            });
+    
+            return matchesCategory;
         });
-      
-        // Update allProducts state with the filtered products
-        setAllProducts(filteredProducts);
-      };
+    
+        setFilteredProducts(filteredProductList);
+    
+    }, [selectedOptions, allProducts]);
+    
+    const handleCheckboxChange = (text) => {
+        // If 'All' is selected, set selectedOptions to an empty array (show all products)
+        if (text.toLowerCase() === 'all') {
+            setSelectedOptions([]);
+        } else {
+            setSelectedOptions((prev) => [...prev, text]);
+        }
+    };
       
   return (
     <div className="space-y-4">

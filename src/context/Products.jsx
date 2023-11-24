@@ -9,6 +9,8 @@ export const ProductContext = createContext({
 const ProductProvider = (props) => {
     
 const [allProducts,setAllProducts] = useState(data);
+const [filteredProducts, setFilteredProducts] = useState(data);
+
 	// const [products, addProducts] = useState([
 	// 	// {
 	// 	// 	name: "biscuits",
@@ -28,7 +30,9 @@ console.log('pro chng: =>'+JSON.stringify(allProducts))
 
 	const value = {
 		allProducts,
+		filteredProducts,
 		setAllProducts: setAllProducts,
+		setFilteredProducts:setFilteredProducts
 		// success,
 		// setSuccess,
 	};
