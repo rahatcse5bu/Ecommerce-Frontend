@@ -27,11 +27,25 @@ const CategoryList = () => {
     
     const handleCheckboxChange = (text) => {
         // If 'All' is selected, set selectedOptions to an empty array (show all products)
-        if (text.toLowerCase() === 'all') {
-            setSelectedOptions([]);
-        } else {
-            setSelectedOptions((prev) => [...prev, text]);
-        }
+        // if (text.toLowerCase() === 'all' || text.toLowerCase() === 'All') {
+        //     setSelectedOptions(['Sneakers','Sandals','Heels','Flats']);
+        // } else {
+        //     setSelectedOptions((prev) => [...prev, text]);
+        // }
+
+        setSelectedOptions((prev) => {
+            // If 'All' is selected, set selectedOptions to an empty array (show all products)
+            if (text.toLowerCase() === 'all' || prev.includes('all')) {
+                return ['Sneakers','Sandals','Heels','Flats'];
+            }
+    
+            // If the text already exists in the array, remove it; otherwise, add it
+            if (prev.includes(text)) {
+                return prev.filter((category) => category !== text);
+            } else {
+                return [...prev, text];
+            }
+        });
     };
       
   return (
@@ -41,7 +55,7 @@ const CategoryList = () => {
         <input
           type="checkbox"
           className="form-checkbox"
-          checked={selectedOptions.includes('All')}
+        //   checked={selectedOptions.includes('All')}
           onChange={() => handleCheckboxChange('All')}
         />
         <span>All</span>
@@ -51,7 +65,7 @@ const CategoryList = () => {
         <input
           type="checkbox"
           className="form-checkbox"
-          checked={selectedOptions.includes('Sneakers')}
+        //   checked={selectedOptions.includes('Sneakers')}
           onChange={() => handleCheckboxChange('Sneakers')}
         />
         <span>Sneakers</span>
@@ -61,26 +75,28 @@ const CategoryList = () => {
         <input
           type="checkbox"
           className="form-checkbox"
-          checked={selectedOptions.includes('Sandals')}
+        //   checked={selectedOptions.includes('Sandals')}
           onChange={() => handleCheckboxChange('Sandals')}
         />
         <span>Sandals</span>
       </label>
 
-      <p>Selected Options: {selectedOptions.join(', ')}</p>
+    
 
       <label className="flex items-center space-x-2">
-        <input type="checkbox" className="form-checkbox"  checked={selectedOptions.includes('Heels')}
+        <input type="checkbox" className="form-checkbox" 
+        //  checked={selectedOptions.includes('Heels')}
           onChange={() => handleCheckboxChange('Heels')} />
         <span>Heels</span>
       </label>
 
       <label className="flex items-center space-x-2">
-        <input type="checkbox" className="form-checkbox"  checked={selectedOptions.includes('Flats')}
+        <input type="checkbox" className="form-checkbox" 
+        //  checked={selectedOptions.includes('Flats')}
           onChange={() => handleCheckboxChange('Flats')}/>
         <span>Flats</span>
       </label>
-
+      <p>Selected Options: {selectedOptions.join(',')}</p>
       {/* Add more labels for additional checkboxes */}
     </div>
   );
