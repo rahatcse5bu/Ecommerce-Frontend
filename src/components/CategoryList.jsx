@@ -35,16 +35,17 @@ const CategoryList = () => {
 
         setSelectedOptions((prev) => {
             // If 'All' is selected, set selectedOptions to an empty array (show all products)
-            if (text.toLowerCase() === 'all' || prev.includes('all')) {
+            if (text.toLowerCase() === 'all' || prev.includes('all') || prev.includes('All')) {
                 return ['Sneakers','Sandals','Heels','Flats'];
             }
-    
+    else{
             // If the text already exists in the array, remove it; otherwise, add it
             if (prev.includes(text)) {
                 return prev.filter((category) => category !== text);
             } else {
                 return [...prev, text];
             }
+        }
         });
     };
       
