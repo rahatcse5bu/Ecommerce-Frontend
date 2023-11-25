@@ -56,7 +56,7 @@ const Navbar = () => {
           </span>
         </div>
       </div>
-      <p className='text-white text-center'>{productName}</p>
+      {/* <p className='text-white text-center'>{productName}</p> */}
     </nav>
   );
 };

@@ -11,20 +11,7 @@ const ProductGrid = () => {
 {filteredProducts.map((product,index)=>(
      <Product key={index} product={product}/>)
 )}
-            {/* <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/> */}
+           
         </div>
     );
 };
