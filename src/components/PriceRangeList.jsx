@@ -30,7 +30,7 @@ const arraysAreEqual = (array1, array2) => {
         setFilteredProducts(() => filteredProductList);
     }
     
-    }, [allProducts, selectedLower, selectedUpper, setFilteredProducts,filteredProducts]);
+    }, [allProducts, selectedLower, selectedUpper, setFilteredProducts]);
     
     const handleProductPriceChange = async (lower,upper) => {
        await setLower(lower);

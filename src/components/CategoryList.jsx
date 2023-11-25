@@ -23,7 +23,7 @@ const CategoryList = () => {
     
         setFilteredProducts(filteredProductList);
     
-    }, [selectedOptions, allProducts]);
+    }, [selectedOptions, allProducts, setFilteredProducts]);
     
     const handleCheckboxChange = (text) => {
         // If 'All' is selected, set selectedOptions to an empty array (show all products)
